@@ -2,7 +2,7 @@ package englishtrans;
 import java.util.Scanner;
 
 public class IntToEng {
-	 // メインメソッド
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -12,12 +12,13 @@ public class IntToEng {
 
     }
 
-    // 数値を英訳する変換するメソッド
     public static String translateEng(int n) {
     	String a[] = {"zero","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"};
         String b[] = {"twenty","thirty","forty","fifty","sixty","seventy","eighty","ninty"};
     	//return a[n];
-    	return judge(n, a, b);
+        if(n<=100)return judge(n, a, b);
+        if(n>100)return judge2(n,a,b);
+        return " ";
     }
 
 	private static String judge(int n, String[] a, String[] b) {
@@ -36,9 +37,36 @@ public class IntToEng {
     		String trans = (b[ten]+" "+a[one]);
     			return trans;
     		}
+    	
     	}
     	else{
     		return"one hundred";
     	}
 	}
+	
+	
+	private static String judge2(int n, String[] a, String[] b){
+		String trans2;
+		int hundsInt=n/100;
+		if(hundsInt > 0){
+		 trans2 =hunds(n,hundsInt,a,b);
+		
+		return trans2;
+		}
+		return " ";
+	}
+	
+	private static String hunds(int n, int hundsInt,String a[],String b[]){
+		String eng =a[hundsInt]+" hundred";
+		int c=n%100;
+		if(c!=0){ 
+
+		eng+=" "+judge(c,a,b);
+		return eng;
+		}
+		return "one thousand";
+		
+	}
+	
+	
 }
